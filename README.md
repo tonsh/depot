@@ -1,4 +1,4 @@
 depot
 =====
 
-《Rails 敏捷web开发》 练习
+《Rails 敏捷web开发》
