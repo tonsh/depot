@@ -26,7 +26,7 @@
 
 development:
   adapter: mysql2
-  database: depot_deve
+  database: depot_dev
   encoding: utf8
   username: root
   password: root
