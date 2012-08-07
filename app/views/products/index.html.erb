@@ -8,19 +8,23 @@
         <td>
           <img width="60" height="70" src="<%= product.image_url%>" />
         </td>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <td><%= product.price %></td>
-        <td><%= product.date_available %></td>
-        <td><%= link_to 'Show', product %></td>
-        <td><%= link_to 'Edit', edit_product_path(product) %></td>
-        <td><%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td>
+          <h4><%= product.title %></h4><br/>
+          <%= product.description %>
+        </td>
+        <td>
+          <%= product.date_available.strftime("%y-%m-%d") %><br/>
+          <h5><%= product.price %></h5>
+        </td>
+        <td>
+          <%= link_to 'Show', product %><br/>
+          <%= link_to 'Edit', edit_product_path(product) %><br/>
+          <%= link_to 'Destroy', product, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </p>
-
-<br />
 
 <%= link_to 'New Product', new_product_path %>
