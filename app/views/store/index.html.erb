@@ -1,2 +1,16 @@
-<h1>Store#index</h1>
-<p>Find me in app/views/store/index.html.erb</p>
+<table class="table table-striped">
+  <tbody>
+  <% @products.each do |product| %>
+    <tr>
+      <td width="300">
+        <img width="200" height="100" src="<%= product.image_url%>" />
+      </td>
+      <td>
+        <h3><%= product.title %></h5>
+        <p><%= product.description %></p>
+        <h5>$<%= product.price %></h5>
+      </td>
+    </tr>
+  <% end %>
+  </tbody>
+</table>

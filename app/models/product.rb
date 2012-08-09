@@ -13,4 +13,12 @@ class Product < ActiveRecord::Base
   def validate
     errors.add(:price, "product_price_should_be_positive") unless price.nil? || price >= 0.01
   end
+
+  # 可销售货品
+  def self.salable_items
+    find(:all,
+      :conditions => "date_available <= now()",
+      :order => "date_available desc"
+    )
+  end
 end
