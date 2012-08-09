@@ -58,5 +58,11 @@ module Depot
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    # disable css by default
+    #config.generators do |g|
+    #  g.stylesheets false
+    #end
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| %Q(#{html_tag}).html_safe }
   end
 end

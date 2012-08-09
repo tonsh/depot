@@ -1,37 +1,49 @@
-<%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+<p>
+  <%= form_for @product, :html => {:class => "form-horizontal"} do |f| %>
 
-      <ul>
-      <% @product.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <div class="control-group<% if @product.errors[:title][0] %> error<%end%>">
+      <label class="control-label"><%= f.label :title %></label>
+      <div class="controls">
+        <%= f.text_field :title, :class => "input-xlarge" %>
+        <span class="help-inline"><%= @product.errors[:title][0] %></span> 
+      </div>
+    </div>
+
+    <div class="control-group<% if @product.errors[:description][0] %> error<%end%>">
+      <label class="control-label"><%= f.label :description %></label>
+      <div class="controls">
+        <%= f.text_area :description, :rows => "3" %>
+        <span class="help-inline"><%= @product.errors[:description][0] %></span> 
+      </div>
+    </div>
+
+    <div class="control-group<% if @product.errors[:image_url][0] %> error<%end%>">
+      <label class="control-label"><%= f.label :image_url %></label>
+      <div class="controls">
+        <%= f.text_field :image_url, :class => "input-xlarge"%>
+        <span class="help-inline"><%= @product.errors[:image_url][0] %></span> 
+      </div>
+    </div>
+
+    <div class="control-group<% if @product.errors[:price][0] %> error<%end%>">
+      <label class="control-label"><%= f.label :price %></label>
+      <div class="controls">
+        <%= f.text_field :price, :class => "span1" %>
+        <span class="help-inline"><%= @product.errors[:price][0] %></span> 
+      </div>
+    </div>
+
+    <div class="control-group<% if @product.errors[:date_availabel][0] %> error<%end%>">
+      <label class="control-label"><%= f.label :date_availabel %></label>
+      <div class="controls">
+        <%= f.date_select :date_available, {:start_year => 2000, :end_year => Date.current.year, :order => [:year, :month, :day], :prompt => {:year => "select year", :month =>"select month", :day => "select day"}}, :class => "span2" %>
+        <span class="help-inline"><%= @product.errors[:date_availabel][0] %></span> 
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <%= f.submit '提交', :name=>"proSubmit",:class=> "btn btn-primary" %>
+      <!--<%= f.button '取消', :name=>"reset",:class=> "btn btn-primary" %>-->
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :title %><br />
-    <%= f.text_field :title %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_area :description %>
-  </div>
-  <div class="field">
-    <%= f.label :image_url %><br />
-    <%= f.text_field :image_url %>
-  </div>
-  <div class="field">
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
-  </div>
-  <div class="field">
-    <%= f.label :date_available %><br />
-    <%= f.datetime_select :date_available %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</p>
