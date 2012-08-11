@@ -14,7 +14,7 @@
         </td>
         <td>
           <%= product.date_available.strftime("%y-%m-%d") %><br/>
-          <h5><%= product.price %></h5>
+          <h5><%= fmt_dollar(product.price) %></h5>
         </td>
         <td>
           <%= link_to 'Show', product %><br/>
