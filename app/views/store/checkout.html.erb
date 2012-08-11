@@ -1,0 +1,43 @@
+<% content_for :title, "Checkout" %>
+
+<h1>CHECKOUT</h1>
+
+<%= form_tag(:action => "save_order", :class => "form-horizontal") do %>
+  <div class="control-group<% if @order.errors[:name][0] %> error<%end%>">
+    <label class="control-label">Name:</label>
+    <div class="controls">
+      <%= text_field("order", "name", :class => "input-xlarge") %>
+      <span class="help-inline"><%= @order.errors[:name][0] %></span> 
+    </div>
+  </div>
+
+  <div class="control-group<% if @order.errors[:email][0] %> error<%end%>">
+    <label class="control-label">Email:</label>
+    <div class="controls">
+      <%= text_field("order", "email", :class => "input-xlarge") %>
+      <span class="help-inline"><%= @order.errors[:email][0] %></span> 
+    </div>
+  </div>
+
+  <div class="control-group<% if @order.errors[:address][0] %> error<%end%>">
+    <label class="control-label">Address:</label>
+    <div class="controls">
+      <%= text_area("order", "address", :cols => "40", :rows => "2") %>
+      <span class="help-inline"><%= @order.errors[:address][0] %></span> 
+    </div>
+  </div>
+
+  <div class="control-group">
+    <label class="control-label">Pay using:</label>
+    <div class="controls">
+    <%=
+      options = [["Select a payment option", ""]] + Order::PAYMENT_TYPES
+      select("order", "pay_type", options, {}, {:class => "span4"})
+    %>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= submit_tag("CHECKOUT", :name=>"orderSubmit",:class=> "btn btn-primary") %>
+  </div>
+<% end %>
