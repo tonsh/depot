@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(:version => 20120811151936) do
     t.decimal  "unit_price", :precision => 10, :scale => 2,                :null => false
     t.datetime "created_at",                                               :null => false
     t.datetime "updated_at",                                               :null => false
-    t.integer  "order_id",                                                 :null => false
+    t.integer  "order_id",                                  :default => 0, :null => false
   end
 
   create_table "orders", :force => true do |t|

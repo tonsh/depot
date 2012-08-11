@@ -32,4 +32,27 @@ class StoreController < ApplicationController
     flash[:notice] = msg if msg
     redirect_to(:action => action)
   end
+
+  def checkout
+    @cart = find_cart
+    @items = @cart.get_items
+    if @items.empty?
+      redirect_with_flash("display_cart", "There's nothing in your cart!")
+    else
+      @order = Order.new
+    end
+  end
+
+  def save_order
+    @cart = find_cart
+    @order = Order.new(params[:order])
+    @order.line_items << @cart.get_items
+
+    if @order.save
+      @cart.empty!
+      redirect_with_flash("index", "Thank you for your order!")
+    else
+      render(:action => "checkout")
+    end
+  end
 end
