@@ -17,7 +17,11 @@
         </thead>
         <tbody>
         <% if @items.empty? %>
-          <tr><td colspan="4"> No Products</td></tr>
+          <tr>
+            <td colspan="4">
+              <div class="alert alert-info">No products in your card!</div>
+            </td>
+          </tr>
         <% else %>
           <% @items.each do |item| %>
             <tr>

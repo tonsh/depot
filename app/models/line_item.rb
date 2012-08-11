@@ -1,11 +1,11 @@
 class LineItem < ActiveRecord::Base
+  attr_accessible :quantity, :product_id, :unit_price
+
   belongs_to :product
 
-  def self.for_product product
-    item = self.new
-    item.quantity = 1
-    item.product = product
-    item.unit_price = product.price
-    item
+  def self.add_item product
+    item = self.new(:quantity => 1, :product_id => product.id, :unit_price => product.price)
+    item.save
+    item.id
   end
 end

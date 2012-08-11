@@ -4,7 +4,7 @@ class StoreController < ApplicationController
   end
 
   def find_cart
-    session[:cat] ||= Cart.new
+    session[:cart] ||= Cart.new
   end
 
   def add_to_cart
@@ -16,6 +16,6 @@ class StoreController < ApplicationController
 
   def display_cart
     @cart = find_cart
-    @items = @cart.items
+    @items = @cart.get_items
   end
 end

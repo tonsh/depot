@@ -7,12 +7,19 @@ class Cart
   end
 
   def add_product product
-    item = @items.find {|i| i.product.id == product.id}
-    if item
-      item.quantity += 1
+    cond = {:product_id => product.id, :unit_price => product.price }
+    item = LineItem.where(cond).limit(1)
+
+    if item.empty?
+      @items << LineItem.add_item(product)
     else
-      @items << LineItem.for_product(product)
+      LineItem.update_counters(item[0].id, :quantity => 1)
     end
     @total_price += product.price
+  end
+
+  def get_items
+    items = LineItem.where(:id => @items)
+    items
   end
 end
