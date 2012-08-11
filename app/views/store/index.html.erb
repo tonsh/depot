@@ -9,7 +9,7 @@
       <td>
         <h3><%= product.title %></h3>
         <p><%= product.description %></p>
-        <div class="span3"><h4>$<%= product.price %></h4></div>
+        <div class="span3"><h4><%= fmt_dollar(product.price) %></h4></div>
         <div class="span3">
           <%= link_to 'Add to cart',
             {:action => 'add_to_cart', :id => product.id},
