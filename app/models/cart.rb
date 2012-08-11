@@ -7,7 +7,7 @@ class Cart
   end
 
   def add_product product
-    cond = {:product_id => product.id, :unit_price => product.price }
+    cond = {:order_id => 0, :product_id => product.id, :unit_price => product.price }
     item = LineItem.where(cond).limit(1)
 
     if item.empty?
@@ -24,7 +24,7 @@ class Cart
   end
 
   def empty!
-    LineItem.where(:id => @items).delete_all
+    LineItem.where(:id => @items, :order_id => 0).delete_all
     @items = []
     @total_price = 0
   end
