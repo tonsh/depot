@@ -22,4 +22,10 @@ class Cart
     items = LineItem.where(:id => @items)
     items
   end
+
+  def empty!
+    LineItem.where(:id => @items).delete_all
+    @items = []
+    @total_price = 0
+  end
 end

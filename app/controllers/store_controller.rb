@@ -14,12 +14,22 @@ class StoreController < ApplicationController
     redirect_to(:action => 'display_cart')
   rescue
     logger.error("Attempt to access invalid product #{params[:id]}")
-    flash[:notice] = "Invalid Product"
-    redirect_to(:action => 'index')
+    redirect_with_flash("index", "Invalid Product")
   end
 
   def display_cart
     @cart = find_cart
     @items = @cart.get_items
+  end
+
+  def empty_cart
+    @cart = find_cart
+    @cart.empty!
+    redirect_with_flash("display_cart", "Your Cart is now empty!")
+  end
+
+  def redirect_with_flash(action, msg = nil)
+    flash[:notice] = msg if msg
+    redirect_to(:action => action)
   end
 end
