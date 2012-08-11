@@ -7,9 +7,14 @@
         <img width="200" height="100" src="<%= product.image_url%>" />
       </td>
       <td>
-        <h3><%= product.title %></h5>
+        <h3><%= product.title %></h3>
         <p><%= product.description %></p>
-        <h5>$<%= product.price %></h5>
+        <div class="span3"><h4>$<%= product.price %></h4></div>
+        <div class="span3">
+          <%= link_to 'Add to cart',
+            {:action => 'add_to_cart', :id => product.id},
+            :class => '' %>
+          </div>
       </td>
     </tr>
   <% end %>
