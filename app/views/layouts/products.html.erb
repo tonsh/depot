@@ -3,7 +3,7 @@
 <head>
   <title><%= yield(:title) %></title>
   <%= stylesheet_link_tag    "bootstrap", :media => "screen" %>
-  <%= stylesheet_link_tag    "store", :media => "screen" %>
+  <%= stylesheet_link_tag    "style", :media => "screen" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
@@ -12,7 +12,7 @@
   <div class="navbar navbar-fixed-top">
     <div class="navbar-inner">
       <div class="container-fluid">
-        <a class="brand" href="#">PRAGMATIC BOOKSHELF</a>
+        <a class="brand" href="#">ADMINISTER BOOKSHELF</a>
       </div>
     </div>
   </div>
@@ -22,10 +22,8 @@
       <div class="span3">
         <div class="well sidebar-nav">
           <ul class="nav nav-list">
-            <li><a href="/store">Home</a></li>
-            <li><a href="#">Questions</a></li>
-            <li><a href="#">News</a></li>
-            <li><a href="#">Contact</a></li>
+            <li><%= link_to("Products", "/products") %></li>
+            <li><%= link_to("Shipping", "/admin/ship") %></li>
           </ul>
         </div>
       </div>

@@ -17,3 +17,5 @@
 *.swp
 *.swo
 README.rdoc
+
+*.bak
