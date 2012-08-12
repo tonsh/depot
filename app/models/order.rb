@@ -9,4 +9,8 @@ class Order < ActiveRecord::Base
     ["Credit Card",     "cc"],
     ["Purchase Order",  "po"],
   ].freeze
+
+  def self.pending_shipping
+    find(:all, :conditions => "shipped_at is null")
+  end
 end
