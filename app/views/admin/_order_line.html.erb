@@ -1,0 +1,15 @@
+<tr>
+  <td>
+    <div><%= order_line.name %></div>
+    <div><%= order_line.address %></div>
+  </td>
+  
+  <td>
+  <% order_line.line_items.each do |item| %>
+    <div>
+      <span><%= item.quantity %></span>
+      <span><%= item.product.title %></span>
+    </div>
+  <% end %>
+  </td>
+</tr>
