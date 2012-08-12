@@ -1,4 +1,6 @@
 Depot::Application.routes.draw do
+  get "admin/index"
+
   get "store/index"
   get "store" => "store#index"
 
