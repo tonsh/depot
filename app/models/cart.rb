@@ -2,29 +2,26 @@ class Cart
   attr_reader :items, :total_price
 
   def initialize
-    @items = []
-    @total_price = 0
+    @items = LineItem.cart_items
+    @total_price = total_price
+  end
+
+  def total_price
+    total = 0
+    @items.each do |itemId, item|
+      total += (item.quantity * item.unit_price)
+    end
+    total
   end
 
   def add_product product
-    cond = {:order_id => 0, :product_id => product.id, :unit_price => product.price }
-    item = LineItem.where(cond).limit(1)
-
-    if item.empty?
-      @items << LineItem.add_item(product)
-    else
-      LineItem.update_counters(item[0].id, :quantity => 1)
-    end
+    item = LineItem.add_product(product) 
+    @items[item.id] = item
     @total_price += product.price
   end
 
-  def get_items
-    items = LineItem.where(:id => @items)
-    items
-  end
-
   def empty!
-    LineItem.where(:id => @items, :order_id => 0).delete_all
+    LineItem.empty_cart
     @items = []
     @total_price = 0
   end

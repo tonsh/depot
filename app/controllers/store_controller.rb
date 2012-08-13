@@ -4,13 +4,12 @@ class StoreController < ApplicationController
   end
 
   def find_cart
-    session[:cart] ||= Cart.new
+    @cart ||= Cart.new
   end
 
   def add_to_cart
     product = Product.find(params[:id])
-    @cart = find_cart
-    @cart.add_product(product)
+    find_cart.add_product(product)
     redirect_to(:action => 'display_cart')
   rescue
     logger.error("Attempt to access invalid product #{params[:id]}")
@@ -18,13 +17,11 @@ class StoreController < ApplicationController
   end
 
   def display_cart
-    @cart = find_cart
-    @items = @cart.get_items
+    @items = find_cart.items
   end
 
   def empty_cart
-    @cart = find_cart
-    @cart.empty!
+    find_cart.empty!
     redirect_with_flash("display_cart", "Your Cart is now empty!")
   end
 
@@ -34,8 +31,7 @@ class StoreController < ApplicationController
   end
 
   def checkout
-    @cart = find_cart
-    @items = @cart.get_items
+    @items = find_cart.items.values
     if @items.empty?
       redirect_with_flash("display_cart", "There's nothing in your cart!")
     else
@@ -44,12 +40,11 @@ class StoreController < ApplicationController
   end
 
   def save_order
-    @cart = find_cart
     @order = Order.new(params[:order])
-    @order.line_items << @cart.get_items
+    @order.line_items << find_cart.items.values
 
     if @order.save
-      @cart.empty!
+      find_cart.empty!
       redirect_with_flash("index", "Thank you for your order!")
     else
       render(:action => "checkout")
