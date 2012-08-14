@@ -1,5 +1,7 @@
 <% content_for :title, "Checkout" %>
 
+<%= render "display_cart_table" %>
+
 <h1>CHECKOUT</h1>
 
 <%= form_tag("save_order", :class => "form-horizontal") do %>

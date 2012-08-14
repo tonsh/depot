@@ -31,7 +31,7 @@ class StoreController < ApplicationController
   end
 
   def checkout
-    @items = find_cart.items.values
+    @items = find_cart.items
     if @items.empty?
       redirect_with_flash("display_cart", "There's nothing in your cart!")
     else
