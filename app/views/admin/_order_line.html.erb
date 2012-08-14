@@ -7,9 +7,13 @@
   <td>
   <% order_line.line_items.each do |item| %>
     <div>
-      <span><%= item.quantity %></span>
+      <span><%= item.quantity %></span> X
       <span><%= item.product.title %></span>
     </div>
   <% end %>
+  </td>
+  
+  <td>
+    <%= check_box("to_be_ship", order_line.id, {}, "yes", "no") %>
   </td>
 </tr>

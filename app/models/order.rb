@@ -13,4 +13,9 @@ class Order < ActiveRecord::Base
   def self.pending_shipping
     find(:all, :conditions => "shipped_at is null")
   end
+
+  # 标记为已发货
+  def mark_as_shipped
+    self.shipped_at = Time.now
+  end
 end
